@@ -1,0 +1,23 @@
+{% extends 'base1.html' %}
+{% load staticfiles %}
+  {% block content %}
+<html>
+<head><center><h1>Product Details</h1></center></head>
+  <body>
+      <div style="margin-left:70px">
+          <a href="/productlisting/"><button style= "width:10%";>Back</button></a>
+      </div>
+    <div  class="col-md-4"><h2 style="margin-left:13%;"> {{ product.productName }} </h2>
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/product1.jpg' %}{% endif %}" alt="My image"  style="width:304px;height:228px;margin-left:5%;"/>
+      </div>
+
+      <div style="margin-top:5%;" class="col-md-8"><h4 style="margin-left:10%;">{{ product.description}}</h4>
+      <h4 style="margin-left:10%;">{{ product.quantity}}</h4>
+      <h4 style="margin-left:10%;">{{ product.price}}</h4>
+      <h4 style="margin-left:10%;">{{ product.phoneNumber}}</h4>
+      <h4 style="margin-left:10%;">{% if product.status %}In Stock {% else %} Out of Stock{% endif %}</h4></div>
+
+
+  </body>
+</html>
+{% endblock %}

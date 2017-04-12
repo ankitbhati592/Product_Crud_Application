@@ -1,0 +1,114 @@
+{% extends 'base1.html' %}
+  {% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script>
+  function validateform(){
+
+  var Firstname=document.myform.fname.value;
+  var Lastname=document.myform.lname.value;
+  var Email=document.myform.Email.value;
+  var password=document.myform.psw.value;
+  var atpos = Email.indexOf("@");
+  var dotpos = Email.lastIndexOf(".");
+
+  if (Firstname==null || Firstname ==""){
+    alert("Firstname can't be blank");
+    return false;
+  }else if (Lastname==null || Lastname==""){
+    alert("Lastname can't be blank");
+    return false;
+  }else if(Email==null || Email=="" || atpos<1 || dotpos<atpos+2 || dotpos+2>=Email.length){
+    alert("Not a valid E-mail address");
+    return false;
+  }else if(password.length<6){
+    alert("Password must be at least 6 characters long.");
+    return false;
+    }
+  }
+  </script>
+
+<style>
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 40%;
+    height: 30px;
+    padding: 5px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color:#668cff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    margin-right:30%;
+}
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+
+
+
+<center><h2 style="margin-left: 70px;">User Registration</h2></center>
+
+<form name="myform" action="/sign/" method="POST"  onsubmit="return validateform()">
+{% csrf_token %}
+
+    <center><div class="container">
+
+
+
+      <h4 style="margin-right: 30%;">First name</h4>
+      <input type="text" placeholder="Enter Firstname" name="fname" size="30">
+
+        <h4 style="margin-right:32%;">Last name</h4>
+      <input type="text" placeholder="Enter Lastname" name="lname" size="30">
+
+      <h4 style="margin-right:25%;">Email or Username</h4>
+      <input type="text" placeholder="Enter Email" name="Email" >
+
+
+      <h4 style="margin-right:32%;">Password</h4>
+      <input type="password" placeholder="Enter Password" name="psw"><br>
+
+      <button type="submit">Save</button>
+    </center>
+    </div>
+
+
+</form>
+
+</body>
+</html>
+{% endblock %}

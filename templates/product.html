@@ -1,0 +1,139 @@
+{% extends 'base1.html' %}
+  {% block content %}
+  <!DOCTYPE html>
+<html>
+  <head>
+    <script>
+    function validateform(){
+
+    var productName=document.myform.pname.value;
+    var description=document.myform.des.value;
+    var quantity=document.myform.quan.value;
+    var price=document.myform.pri.value;
+    var phone=document.myform.phne.value;
+    // return false;
+    if(productName==""){
+      alert("ProductName can't be blank");
+      return false;
+    }else if (description ==" "){
+      alert("Description can't be blank");
+      return false;
+    }else if (quantity =="" && quantity != /^\d+$/){
+      alert("Quantity can't be blank");
+      return false;
+    }else if (price =="" && price != /^\d+$/){
+      alert("Price can't be blank");
+      return false;
+   }else if (phone =="" && phone != /^\d+$/ && phone !=/^\d{10}$/){
+     alert("Phone number can't be blank");
+     return false;
+
+}
+}
+    </script>
+  <style>
+form {
+    border: 3px solid #f1f1f1;
+}
+
+input[type=text], input[type=password] {
+    width: 40%;
+    height: 30px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #5882FA;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    margin-right:30%;
+
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+
+
+
+
+.container {
+    padding: 16px;
+    width: 1283px;
+}
+
+span.psw {
+    float: right;//platform.linkedin.com/in.js
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+  </style>
+</head>
+
+<body>
+
+<center><h2 style="margin-left: 20px;">Add product </h2></center>
+
+<form name="myform" action="/detailproduct/" method="POST"  onsubmit="return validateform()" accept="image/gif, image/jpeg" enctype="multipart/form-data"  >
+{% csrf_token %}
+
+      <center><div class="container">
+
+
+          <h4 style="margin-right: 30%;">ProductName</h4>
+          <input type="text" placeholder="Enter productName" name="pname" ><br>
+
+          <h4 style="margin-right: 32%;">Description</h4>
+          <textarea rows="4" cols="50"   placeholder="Enter description" name="des" style="margin-left:0%; width:40%;"> </textarea><br>
+
+          <h4 style="margin-right: 34%;">Quantity</h4>
+          <input type="number" placeholder="quantity" name="quan" style="margin-right: 12%;" ><br>
+
+
+          <h4 style="margin-right: 36%;">Price</h4>
+          <input type="number" placeholder="price" name="pri" style="margin-right: 12%;"><br>
+
+          <h4 style="margin-right: 33%;">Phone No:</h4>
+          <input type="tel" placeholder="phone number" name="phne" style="margin-right: 12%;" pattern="^\d{10}$" ><br>
+
+
+          <h4 style="margin-right: 36%;">Status:</h4>
+
+          <div class=col-md-9><input type="radio" name="status" value="1" checked >In Stock</div><br>
+          <div class=col-md-9><input type="radio" name="status" value="0" style="margin-left:30px" >Out of Stock<br></div>
+
+          <h4 style="margin-right: 30%;">Product image:</h4>
+          <input type="file"  name="pic" ><br>
+
+
+          <button type="submit">Save</button>
+        </center>
+
+      </div>
+
+</form>
+
+</body>
+</html>
+{% endblock %}
